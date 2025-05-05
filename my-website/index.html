@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JFlix - Just Chill!</title>
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="preload" href="css/home.css" as="style">
+  <link rel="preload" href="js/home.js" as="script">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script defer src="js/home.js"></script>
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="nav-left">
+      <img src="logo.png" alt="JFlix Logo" class="logo" />
+      <span class="slogan">JUST CHILL!</span>
+      <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="#">TV Shows</a>
+        <a href="#">Movies</a>
+        <a href="#">Anime</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="search-container">
+        <input type="text" class="search-bar" placeholder="Search..." onfocus="openSearchModal()" />
+        <i class="fas fa-search search-icon"></i>
+      </div>
+      <div class="profile-menu">
+        <img src="profile.png" alt="Profile" class="profile-icon" />
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-banner" id="banner">
+    <div class="banner-content">
+      <h1 id="banner-title"></h1>
+      <div class="banner-buttons">
+        <button class="play-button"><i class="fas fa-play"></i> Play</button>
+        <button class="info-button"><i class="fas fa-info-circle"></i> More Info</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="filter-section">
+    <div class="genre-filter">
+      <h3>Genres</h3>
+      <div class="genre-buttons">
+        <button class="genre-btn active" data-genre="all">All</button>
+        <button class="genre-btn" data-genre="action">Action</button>
+        <button class="genre-btn" data-genre="comedy">Comedy</button>
+        <button class="genre-btn" data-genre="drama">Drama</button>
+        <button class="genre-btn" data-genre="horror">Horror</button>
+        <button class="genre-btn" data-genre="romance">Romance</button>
+        <button class="genre-btn" data-genre="sci-fi">Sci-Fi</button>
+        <button class="genre-btn" data-genre="anime">Anime</button>
+      </div>
+    </div>
+    <div class="sort-filter">
+      <select id="sort-by" onchange="sortContent()">
+        <option value="popular">Most Popular</option>
+        <option value="rating">Highest Rated</option>
+        <option value="newest">Newest First</option>
+        <option value="oldest">Oldest First</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="row">
+      <h2>Trending Now</h2>
+      <div class="list" id="trending-list"></div>
+    </div>
+
+    <div class="row">
+      <h2>Popular Movies</h2>
+      <div class="list" id="movies-list"></div>
+    </div>
+
+    <div class="row">
+      <h2>Popular TV Shows</h2>
+      <div class="list" id="tvshows-list"></div>
+    </div>
+
+    <div class="row">
+      <h2>Popular Anime</h2>
+      <div class="list" id="anime-list"></div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div class="modal-body">
+        <img id="modal-image" src="" alt="" />
+        <div class="modal-text">
+          <h2 id="modal-title"></h2>
+          <div class="stars" id="modal-rating"></div>
+          <p id="modal-description"></p>
+          <div class="modal-genres" id="modal-genres"></div>
+        </div>
+      </div>
+      
+      <div class="server-selector">
+        <label for="server">Select Server:</label>
+        <select id="server" onchange="changeServer()">
+          <optgroup label="Premium Servers (Best Quality)">
+            <option value="vidsrc.to">Vidsrc.to (4K Quality)</option>
+            <option value="2embed.org">2Embed.org (1080p)</option>
+            <option value="vidsrc.me">Vidsrc.me (1080p)</option>
+            <option value="vidsrc.pro">Vidsrc.pro (1080p)</option>
+            <option value="vidsrc.stream">Vidsrc.stream (1080p)</option>
+          </optgroup>
+          <optgroup label="HD Servers">
+            <option value="superembed.stream">SuperEmbed.stream (720p)</option>
+            <option value="vidsrc.icu">Vidsrc.icu (720p)</option>
+            <option value="vidsrc.xyz">Vidsrc.xyz (720p)</option>
+            <option value="vidsrc.cc">Vidsrc.cc (720p)</option>
+            <option value="vidsrc.net">Vidsrc.net (720p)</option>
+          </optgroup>
+          <optgroup label="Alternative Servers">
+            <option value="vidsrc.plus">Vidsrc.plus</option>
+            <option value="vidsrc.one">Vidsrc.one</option>
+            <option value="vidsrc.two">Vidsrc.two</option>
+            <option value="vidsrc.three">Vidsrc.three</option>
+            <option value="vidsrc.four">Vidsrc.four</option>
+            <option value="vidsrc.five">Vidsrc.five</option>
+            <option value="vidsrc.six">Vidsrc.six</option>
+            <option value="vidsrc.seven">Vidsrc.seven</option>
+            <option value="vidsrc.eight">Vidsrc.eight</option>
+            <option value="vidsrc.nine">Vidsrc.nine</option>
+            <option value="vidsrc.ten">Vidsrc.ten</option>
+          </optgroup>
+          <optgroup label="Backup Servers">
+            <option value="vidsrc.backup1">Vidsrc Backup 1</option>
+            <option value="vidsrc.backup2">Vidsrc Backup 2</option>
+            <option value="vidsrc.backup3">Vidsrc Backup 3</option>
+            <option value="vidsrc.backup4">Vidsrc Backup 4</option>
+            <option value="vidsrc.backup5">Vidsrc Backup 5</option>
+          </optgroup>
+        </select>
+        <div class="server-info">
+          <span class="server-quality" id="server-quality">Quality: 4K</span>
+          <span class="server-status" id="server-status">Status: Active</span>
+        </div>
+      </div>
+
+      <div class="modal-video-container">
+        <div class="video-error" style="display: none;">
+          <i class="fas fa-exclamation-circle"></i>
+          <p>Error loading video. Trying next server...</p>
+        </div>
+        <iframe id="modal-video" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-modal" id="search-modal">
+    <span class="close" onclick="closeSearchModal()">&times;</span>
+    <div class="search-container">
+      <input type="text" id="search-input" placeholder="Search for movies, TV shows, or anime..." oninput="searchTMDB()" />
+      <i class="fas fa-search search-icon"></i>
+    </div>
+    <div class="search-filters">
+      <select id="search-type">
+        <option value="all">All</option>
+        <option value="movie">Movies</option>
+        <option value="tv">TV Shows</option>
+        <option value="anime">Anime</option>
+      </select>
+    </div>
+    <div class="results" id="search-results"></div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>JFlix</h3>
+        <p>Your ultimate streaming platform</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <a href="#">Home</a>
+        <a href="#">TV Shows</a>
+        <a href="#">Movies</a>
+        <a href="#">Anime</a>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">DMCA</a>
+      </div>
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <a href="#">Support</a>
+        <a href="#">About Us</a>
+        <a href="#">Report Issue</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 JFlix. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
