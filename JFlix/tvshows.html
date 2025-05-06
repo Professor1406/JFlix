@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TV Shows - JFlix</title>
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="preload" href="css/home.css" as="style">
+  <link rel="preload" href="js/tvshows.js" as="script">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script defer src="js/tvshows.js"></script>
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="nav-left">
+      <img src="/images/logo.png" alt="JFlix Logo" class="logo" />
+      <button class="menu-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="nav-links">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="movies.html"><i class="fas fa-film"></i> Movies</a>
+        <a href="tvshows.html" class="active"><i class="fas fa-tv"></i> TV Shows</a>
+        <a href="anime.html"><i class="fas fa-dragon"></i> Anime</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <input type="text" class="search-bar" placeholder="Search TV shows..." onfocus="openSearchModal()" />
+      <button class="search-btn"><i class="fas fa-search"></i></button>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-header">
+      <h2>All TV Shows</h2>
+      <div class="filter-controls">
+        <select id="genre-filter" onchange="filterTVShows()">
+          <option value="">All Genres</option>
+          <option value="10759">Action & Adventure</option>
+          <option value="16">Animation</option>
+          <option value="35">Comedy</option>
+          <option value="80">Crime</option>
+          <option value="99">Documentary</option>
+          <option value="18">Drama</option>
+          <option value="10751">Family</option>
+          <option value="10762">Kids</option>
+          <option value="9648">Mystery</option>
+          <option value="10763">News</option>
+          <option value="10764">Reality</option>
+          <option value="10765">Sci-Fi & Fantasy</option>
+          <option value="10766">Soap</option>
+          <option value="10767">Talk</option>
+          <option value="10768">War & Politics</option>
+          <option value="37">Western</option>
+        </select>
+        <select id="sort-filter" onchange="filterTVShows()">
+          <option value="popularity.desc">Most Popular</option>
+          <option value="vote_average.desc">Top Rated</option>
+          <option value="first_air_date.desc">Newest</option>
+        </select>
+      </div>
+    </div>
+    <div class="list" id="tvshows-list"></div>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()"><i class="fas fa-times"></i></span>
+      <div class="modal-body">
+        <img id="modal-image" src="" alt="" />
+        <div class="modal-text">
+          <h2 id="modal-title"></h2>
+          <div class="modal-meta">
+            <span class="rating"><i class="fas fa-star"></i> <span id="modal-rating"></span></span>
+            <span class="year" id="modal-year"></span>
+          </div>
+          <p id="modal-description"></p>
+          <div class="modal-genres" id="modal-genres"></div>
+        </div>
+      </div>
+      <div class="server-selector">
+        <div class="server-controls">
+          <div class="server-group">
+            <label for="server">Server:</label>
+            <select id="server" onchange="changeServer()">
+              <option value="vidsrcme">VidSrc.me (Recommended)</option>
+              <option value="2embed">2Embed</option>
+              <option value="superembed">SuperEmbed</option>
+              <option value="vidsrc">VidSrc</option>
+              <option value="vidsrcpro">VidSrc.pro</option>
+              <option value="vidsrcto">VidSrc.to</option>
+              <option value="vidsrcstream">VidSrc.stream</option>
+            </select>
+          </div>
+          <div class="quality-group">
+            <label for="quality">Quality:</label>
+            <select id="quality" onchange="changeQuality()">
+              <option value="auto">Auto (Best)</option>
+              <option value="1080p">1080p</option>
+              <option value="720p">720p</option>
+              <option value="480p">480p</option>
+              <option value="360p">360p</option>
+            </select>
+          </div>
+          <div class="subtitle-group">
+            <label for="subtitle">Subtitles:</label>
+            <select id="subtitle" onchange="changeSubtitle()">
+              <option value="none">None</option>
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+              <option value="fr">French</option>
+              <option value="de">German</option>
+              <option value="ja">Japanese</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="video-container">
+        <iframe id="modal-video" width="100%" height="315" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-modal" id="search-modal">
+    <span class="close" onclick="closeSearchModal()"><i class="fas fa-times"></i></span>
+    <div class="search-container">
+      <input type="text" id="search-input" placeholder="Search for a TV show..." oninput="searchTVShows()" />
+      <div class="results" id="search-results"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>JFlix</h3>
+        <p>Your ultimate destination for movies, TV shows, and anime.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="movies.html">Movies</a>
+        <a href="tvshows.html">TV Shows</a>
+        <a href="anime.html">Anime</a>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">DMCA</a>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-discord"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 JFlix. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html> 
