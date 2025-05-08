@@ -1,0 +1,455 @@
+/* Global Age Verification Styles for JFlix */
+
+.age-verification-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+}
+
+.age-verification-container {
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+  border: 1px solid #333;
+  text-align: center;
+  color: #fff;
+}
+
+/* Mobile styles for age verification */
+@media (max-width: 768px) {
+  .age-verification-container {
+    padding: 20px;
+    width: 95%;
+  }
+  
+  .warning-icon {
+    font-size: 2.5rem;
+  }
+  
+  .age-verification-container h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .age-verification-container {
+    padding: 15px;
+    width: 95%;
+  }
+  
+  .warning-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .age-verification-container h2 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+  
+  .age-verification-container p {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+}
+
+.warning-icon {
+  font-size: 3rem;
+  color: #ff3a3a;
+  margin-bottom: 15px;
+}
+
+.age-verification-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #ff3a3a;
+}
+
+.age-verification-container p {
+  margin-bottom: 20px;
+  line-height: 1.5;
+  color: #ddd;
+}
+
+.age-verification-form {
+  margin: 20px 0;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.date-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  justify-content: center;
+}
+
+.date-inputs select {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #444;
+  outline: none;
+  min-height: 44px; /* Better touch target for mobile */
+  font-size: 16px; /* Prevents iOS zoom on focus */
+}
+
+/* Mobile improvements for form controls */
+@media (max-width: 480px) {
+  .date-inputs select {
+    margin-bottom: 8px;
+    width: 100%;
+  }
+  
+  #global-verify-age {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+  }
+}
+
+.date-inputs select:focus {
+  border-color: #ff3a3a;
+}
+
+#global-verify-age {
+  background-color: #ff3a3a;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.3s;
+}
+
+#global-verify-age:hover:not(:disabled) {
+  background-color: #e62020;
+}
+
+#global-verify-age:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #ff3a3a;
+  margin-top: 10px;
+  font-weight: 500;
+  min-height: 20px;
+}
+
+.age-verification-footer {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #333;
+}
+
+.age-verification-footer p {
+  font-size: 0.9rem;
+  color: #999;
+  margin-bottom: 15px;
+}
+
+.exit-button {
+  background-color: transparent;
+  color: #999;
+  border: 1px solid #444;
+  padding: 8px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.exit-button:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Adult Content Badge Styles */
+.adult-content-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 0, 0, 0.8);
+  color: white;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.adult-content-badge i {
+  font-size: 14px;
+}
+
+/* R-18 Badge Styles */
+.r18-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ff3a3a;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 5;
+  border: 1px solid #ff3a3a;
+}
+
+/* Vivamax Badge Styles */
+.vivamax-badge {
+  position: absolute;
+  bottom: 40px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ff3a3a;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 5;
+  border: 1px solid #ff3a3a;
+}
+
+/* Adult Tag in Movie Info */
+.adult-tag {
+  background-color: #ff3a3a;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+/* Search Meta Styles */
+.search-meta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* Genre Tags in Modal */
+.genre-tag {
+  display: inline-block;
+  padding: 4px 8px;
+  margin: 0 5px 5px 0;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.r18-tag {
+  background-color: #000;
+  color: #ff3a3a;
+  border: 1px solid #ff3a3a;
+}
+
+.vivamax-tag {
+  background-color: #ff3a3a;
+  color: #fff;
+}
+
+/* Modal Warning */
+.modal-warning {
+  background-color: rgba(255, 0, 0, 0.1);
+  border-left: 3px solid #ff3a3a;
+  padding: 10px 15px;
+  margin: 15px 0;
+  border-radius: 4px;
+  color: #ff3a3a;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: pulse-warning 2s infinite;
+}
+
+.modal-warning i {
+  font-size: 18px;
+}
+
+@keyframes pulse-warning {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 58, 58, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 5px rgba(255, 58, 58, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 58, 58, 0);
+  }
+}
+
+.adult-content-card {
+  position: relative;
+  border: 2px solid rgba(255, 0, 0, 0.5) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.adult-content-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+}
+
+.adult-content-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(0,0,0,0.8) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Add a subtle red glow effect to adult content cards */
+.adult-content-card {
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+}
+
+/* Make the adult content badge more noticeable with animation */
+.adult-content-badge {
+  animation: pulse-badge 2s infinite;
+}
+
+@keyframes pulse-badge {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.search-note {
+  background-color: rgba(255, 59, 59, 0.1);
+  border-left: 3px solid #ff3b3b;
+  padding: 10px 15px;
+  margin: 15px 0;
+  border-radius: 4px;
+  color: #ddd;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.search-note i {
+  margin-right: 5px;
+  color: #ff3b3b;
+}
+
+.vivamax-link {
+  color: #ff3b3b;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+.vivamax-link:hover {
+  color: #ff6b6b;
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .date-inputs {
+    flex-direction: column;
+  }
+  
+  .age-verification-container {
+    padding: 20px;
+  }
+  
+  .age-verification-container h2 {
+    font-size: 1.5rem;
+  }
+}
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.search-note {
+  background-color: rgba(255, 59, 59, 0.1);
+  border-left: 3px solid #ff3b3b;
+  padding: 10px 15px;
+  margin: 15px 0;
+  border-radius: 4px;
+  color: #ddd;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.search-note i {
+  margin-right: 5px;
+  color: #ff3b3b;
+}
+
+.vivamax-link {
+  color: #ff3b3b;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+.vivamax-link:hover {
+  color: #ff6b6b;
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .date-inputs {
+    flex-direction: column;
+  }
+  
+  .age-verification-container {
+    padding: 20px;
+  }
+  
+  .age-verification-container h2 {
+    font-size: 1.5rem;
+  }
+}

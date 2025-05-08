@@ -1,0 +1,43 @@
+/* Vivamax Home Styles */
+
+.card-img-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.vivamax-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(237, 29, 36, 0.8);
+  color: white;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: bold;
+  z-index: 5;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Vivamax section specific styles */
+#vivamax-list .movie-card:hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(237, 29, 36, 0) 70%, rgba(237, 29, 36, 0.1) 100%);
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+/* Ensure the image container has proper dimensions */
+.card-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
