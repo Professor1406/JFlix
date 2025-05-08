@@ -1,0 +1,47 @@
+/* Modal Fixes for Content Type Badge */
+
+/* Fix for content type badge in modal */
+.modal-meta .content-type-badge {
+  position: relative;
+  top: auto;
+  right: auto;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 10px;
+  font-size: 0.75rem;
+  padding: 3px 8px;
+}
+
+/* Ensure proper spacing in modal meta information */
+.modal-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+/* Fix for similar content badges */
+.similar-content .content-type-badge {
+  font-size: 0.65rem;
+  padding: 2px 6px;
+}
+
+/* Ensure proper positioning of badges in search results */
+.search-modal .content-type-badge {
+  font-size: 0.65rem;
+  padding: 2px 6px;
+}
+
+/* Fix for modal content on mobile */
+@media (max-width: 768px) {
+  .modal-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .modal-meta .content-type-badge {
+    margin-left: 0;
+    margin-top: 5px;
+  }
+}

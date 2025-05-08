@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>Fix Similar Content</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #141414;
+      color: white;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    h1, h2, h3 {
+      margin-top: 0;
+    }
+    
+    .action-panel {
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    
+    .test-button {
+      background-color: #e50914;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .test-button:hover {
+      background-color: #f40612;
+    }
+    
+    .similar-content {
+      margin-top: 30px;
+      padding: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+    }
+    
+    .similar-content h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: #fff;
+      font-weight: 500;
+    }
+    
+    .similar-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+      margin-top: 10px;
+    }
+    
+    .similar-item {
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.3);
+    }
+    
+    .similar-item:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+    
+    .similar-item img {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .similar-item-title {
+      padding: 8px;
+      font-size: 0.85rem;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.7);
+    }
+    
+    #status {
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+    }
+    
+    .log-panel {
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+    }
+    
+    pre {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 4px;
+      overflow: auto;
+      max-height: 200px;
+      font-family: monospace;
+      font-size: 14px;
+      color: #ddd;
+    }
+    
+    .error {
+      color: #ff6b6b;
+      font-weight: bold;
+    }
+    
+    .success {
+      color: #69db7c;
+      font-weight: bold;
+    }
+    
+    .fix-instructions {
+      background-color: rgba(229, 9, 20, 0.1);
+      border: 1px solid rgba(229, 9, 20, 0.3);
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+    }
+    
+    .fix-instructions h3 {
+      color: #e50914;
+      margin-top: 0;
+    }
+    
+    .fix-instructions ol {
+      padding-left: 20px;
+    }
+    
+    .fix-instructions li {
+      margin-bottom: 10px;
+    }
+    
+    .code-block {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 15px;
+      border-radius: 4px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Fix Similar Content Feature</h1>
+    
+    <div class="action-panel">
+      <h2>Test Panel</h2>
+      <div id="status">Ready to test</div>
+      
+      <button class="test-button" id="test-movie">Test Movie Similar Content</button>
+      <button class="test-button" id="test-tv">Test TV Show Similar Content</button>
+      <button class="test-button" id="test-html">Test HTML Structure</button>
+      <button class="test-button" id="test-css">Test CSS Styles</button>
+    </div>
+    
+    <div class="similar-content">
+      <h3>You May Also Like</h3>
+      <div class="similar-list" id="similar-content-list"></div>
+    </div>
+    
+    <div class="log-panel">
+      <h2>Debug Log</h2>
+      <pre id="log-output">Click a test button to start debugging...</pre>
+    </div>
+    
+    <div class="fix-instructions">
+      <h3>How to Fix the Similar Content Feature</h3>
+      <p>Follow these steps to fix the similar content feature in your JFlix website:</p>
+      
+      <ol>
+        <li>
+          <strong>Verify HTML Structure</strong>: Make sure the similar content HTML structure exists in all pages.
+          <div class="code-block">&lt;div class="similar-content"&gt;
+  &lt;h3&gt;You May Also Like&lt;/h3&gt;
+  &lt;div class="similar-list" id="similar-content-list"&gt;&lt;/div&gt;
+&lt;/div&gt;</div>
+        </li>
+        
+        <li>
+          <strong>Add CSS Styling</strong>: Ensure the CSS for similar content is properly loaded.
+          <div class="code-block">&lt;link rel="stylesheet" href="css/similar-content.css?v=20250508"&gt;</div>
+        </li>
+        
+        <li>
+          <strong>Check JavaScript Functions</strong>: Verify the fetchSimilarContent and displaySimilarContent functions are working.
+          <div class="code-block">// Add this to showDetails function
+fetchSimilarContent(item);</div>
+        </li>
+        
+        <li>
+          <strong>Clear Browser Cache</strong>: Force a hard refresh (Cmd+Shift+R on Mac, Ctrl+F5 on Windows).
+        </li>
+        
+        <li>
+          <strong>Check Console for Errors</strong>: Open browser developer tools to see any JavaScript errors.
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    const API_KEY = '648c004c97b5a1425c702528ab88ddac';
+    const BASE_URL = 'https://api.themoviedb.org/3';
+    const IMG_URL = 'https://image.tmdb.org/t/p/original';
+    
+    // Test movie ID (The Avengers)
+    const TEST_MOVIE_ID = 24428;
+    
+    // Test TV show ID (Stranger Things)
+    const TEST_TV_ID = 66732;
+    
+    // Log function
+    function log(message, type = 'info') {
+      const logOutput = document.getElementById('log-output');
+      const timestamp = new Date().toLocaleTimeString();
+      const logClass = type === 'error' ? 'error' : type === 'success' ? 'success' : '';
+      
+      const logMessage = `[${timestamp}] ${message}`;
+      console.log(logMessage);
+      
+      if (logClass) {
+        logOutput.innerHTML += `<span class="${logClass}">${logMessage}</span>\n`;
+      } else {
+        logOutput.innerHTML += `${logMessage}\n`;
+      }
+      
+      // Auto-scroll to bottom
+      logOutput.scrollTop = logOutput.scrollHeight;
+    }
+    
+    // Test movie similar content
+    document.getElementById('test-movie').addEventListener('click', () => {
+      document.getElementById('status').textContent = 'Testing movie similar content...';
+      log('Testing movie similar content...');
+      fetchSimilarContent('movie', TEST_MOVIE_ID);
+    });
+    
+    // Test TV show similar content
+    document.getElementById('test-tv').addEventListener('click', () => {
+      document.getElementById('status').textContent = 'Testing TV show similar content...';
+      log('Testing TV show similar content...');
+      fetchSimilarContent('tv', TEST_TV_ID);
+    });
+    
+    // Test HTML structure
+    document.getElementById('test-html').addEventListener('click', () => {
+      log('Testing HTML structure...');
+      
+      const similarContent = document.querySelector('.similar-content');
+      const similarList = document.getElementById('similar-content-list');
+      
+      if (similarContent) {
+        log('Similar content container found', 'success');
+      } else {
+        log('Similar content container NOT found', 'error');
+      }
+      
+      if (similarList) {
+        log('Similar content list found', 'success');
+      } else {
+        log('Similar content list NOT found', 'error');
+      }
+    });
+    
+    // Test CSS styles
+    document.getElementById('test-css').addEventListener('click', () => {
+      log('Testing CSS styles...');
+      
+      const similarContent = document.querySelector('.similar-content');
+      if (!similarContent) {
+        log('Similar content container not found, cannot test styles', 'error');
+        return;
+      }
+      
+      const styles = window.getComputedStyle(similarContent);
+      
+      log(`Similar content margin-top: ${styles.marginTop}`);
+      log(`Similar content padding-top: ${styles.paddingTop}`);
+      log(`Similar content border-top: ${styles.borderTop}`);
+      
+      const similarList = document.getElementById('similar-content-list');
+      if (!similarList) {
+        log('Similar content list not found, cannot test styles', 'error');
+        return;
+      }
+      
+      const listStyles = window.getComputedStyle(similarList);
+      log(`Similar list display: ${listStyles.display}`);
+      log(`Similar list grid-template-columns: ${listStyles.gridTemplateColumns}`);
+      
+      log('CSS styles test complete', 'success');
+    });
+    
+    // Fetch similar content
+    async function fetchSimilarContent(type, id) {
+      try {
+        const url = `${BASE_URL}/${type}/${id}/similar?api_key=${API_KEY}`;
+        log(`Fetching from URL: ${url}`);
+        
+        const res = await fetch(url);
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        
+        const data = await res.json();
+        log(`Successfully fetched ${data.results.length} similar items for ${type}`, 'success');
+        
+        displaySimilarContent(data.results.slice(0, 8)); // Display up to 8 similar items
+      } catch (error) {
+        log(`Error fetching similar content: ${error.message}`, 'error');
+        document.getElementById('status').textContent = 'Error fetching similar content';
+      }
+    }
+    
+    // Display similar content
+    function displaySimilarContent(items) {
+      log(`Displaying ${items.length} similar content items...`);
+      const similarContainer = document.getElementById('similar-content-list');
+      
+      if (!similarContainer) {
+        log('Similar content container not found in DOM', 'error');
+        return;
+      }
+      
+      log('Clearing similar container content');
+      similarContainer.innerHTML = '';
+      
+      if (!items || items.length === 0) {
+        log('No items to display', 'error');
+        similarContainer.innerHTML = '<p style="color: rgba(255,255,255,0.7);">No similar content found.</p>';
+        return;
+      }
+      
+      items.forEach(item => {
+        if (!item.poster_path) {
+          log(`Skipping item without poster: ${item.title || item.name}`);
+          return; // Skip items without posters
+        }
+        
+        log(`Creating similar item for: ${item.title || item.name}`);
+        const similarItem = document.createElement('div');
+        similarItem.classList.add('similar-item');
+        
+        const img = document.createElement('img');
+        img.src = `${IMG_URL}${item.poster_path}`;
+        img.alt = item.title || item.name;
+        
+        const title = document.createElement('div');
+        title.classList.add('similar-item-title');
+        title.textContent = item.title || item.name;
+        
+        similarItem.appendChild(img);
+        similarItem.appendChild(title);
+        similarContainer.appendChild(similarItem);
+      });
+      
+      log('Similar content display complete', 'success');
+      document.getElementById('status').textContent = 'Similar content displayed successfully';
+    }
+    
+    // Initial log
+    log('Fix Similar Content tool loaded');
+    log('Ready to test the similar content feature');
+  </script>
+</body>
+</html>

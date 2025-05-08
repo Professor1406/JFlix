@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>Vivamax Movies - JFlix</title>
+  <link rel="stylesheet" href="css/jflix-modern-v3.css?v=20250508">
+  <link rel="stylesheet" href="css/vivamax-content.css?v=20250508">
+  <link rel="stylesheet" href="css/similar-content.css?v=20250508">
+  <link rel="stylesheet" href="css/modal-fixes.css?v=20250508">
+  <link rel="stylesheet" href="css/age-verification.css?v=20250508">
+  <link rel="preload" href="css/jflix-modern-v3.css?v=20250508" as="style">
+  <link rel="preload" href="css/similar-content.css?v=20250508" as="style">
+  <link rel="preload" href="css/vivamax-content.css?v=20250508" as="style">
+  <link rel="preload" href="js/vivamax.js?v=20250508" as="script">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <!-- Age Verification Popup -->
+  <div class="age-verification-overlay" id="age-verification">
+    <div class="age-verification-container">
+      <i class="fas fa-exclamation-triangle warning-icon"></i>
+      <h2>Age Verification Required</h2>
+      <p>The content on this page is intended for mature audiences only. You must be at least 18 years old to access Vivamax content.</p>
+      
+      <div class="age-verification-form">
+        <div class="form-group">
+          <label>Please enter your date of birth:</label>
+          <div class="date-inputs">
+            <select id="birth-month" aria-label="Birth Month">
+              <option value="">Month</option>
+              <option value="1">January</option>
+              <option value="2">February</option>
+              <option value="3">March</option>
+              <option value="4">April</option>
+              <option value="5">May</option>
+              <option value="6">June</option>
+              <option value="7">July</option>
+              <option value="8">August</option>
+              <option value="9">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+            
+            <select id="birth-day" aria-label="Birth Day">
+              <option value="">Day</option>
+              <!-- Days will be populated by JavaScript -->
+            </select>
+            
+            <select id="birth-year" aria-label="Birth Year">
+              <option value="">Year</option>
+              <!-- Years will be populated by JavaScript -->
+            </select>
+          </div>
+        </div>
+        
+        <button id="verify-age" disabled>Verify Age & Enter</button>
+        <div class="error-message" id="age-error"></div>
+      </div>
+      
+      <div class="age-verification-footer">
+        <p>By entering, you confirm that you are at least 18 years old and agree to view adult content.</p>
+        <button class="exit-button" id="exit-button">Exit</button>
+      </div>
+    </div>
+  </div>
+  <div class="navbar">
+    <div class="nav-left">
+      <img src="images/logo.png" alt="JFlix Logo" class="logo" />
+      <button class="menu-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="nav-links">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="movies.html"><i class="fas fa-film"></i> Movies</a>
+        <a href="tvshows.html"><i class="fas fa-tv"></i> TV Shows</a>
+        <a href="kdrama.html"><i class="fas fa-heart"></i> Korean TV</a>
+        <a href="vivamax.html" class="active"><i class="fas fa-fire"></i> Vivamax</a>
+        <a href="anime.html"><i class="fas fa-dragon"></i> Anime</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="coffee-btn" onclick="openDonationPopup()"><i class="fas fa-coffee"></i> Buy me a Coffee</button>
+      <input type="text" class="search-bar" placeholder="Search Vivamax movies..." onfocus="openSearchModal()" />
+      <button class="search-btn"><i class="fas fa-search"></i></button>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-header">
+      <h2>Vivamax Movies</h2>
+    </div>
+    <div class="section-description">
+      <p>Explore the exclusive collection of Vivamax movies from the Philippines. Featuring adult-oriented Filipino films with mature themes and content.</p>
+    </div>
+    <div class="exclusive-notice">
+      <i class="fas fa-info-circle"></i>
+      <p>Please note: All Pinoy adult movies are exclusively available on this Vivamax page and cannot be accessed through other sections of the website.</p>
+    </div>
+    
+    <div class="browser-notice">
+      <i class="fas fa-globe"></i>
+      <p>For the best mobile experience, please use Chrome, Safari, Firefox, or your device's default browser when accessing JFlix on a smartphone.</p>
+    </div>
+    
+    <div class="filter-section">
+      <h3>Filter Content</h3>
+      <div class="filter-controls">
+        <select id="genre-filter" onchange="filterVivamaxContent()">
+          <option value="">All Genres</option>
+          <!-- Common genres -->
+          <option value="18">Drama</option>
+          <option value="10749">Romance</option>
+          <option value="35">Comedy</option>
+          <option value="9648">Mystery</option>
+          
+          <!-- Movie specific genres -->
+          <option value="28">Action</option>
+          <option value="12">Adventure</option>
+          <option value="80">Crime</option>
+          <option value="99">Documentary</option>
+          <option value="10751">Family</option>
+          <option value="36">History</option>
+          <option value="27">Horror</option>
+          <option value="10402">Music</option>
+          <option value="53">Thriller</option>
+        </select>
+
+        <select id="sort-filter" onchange="filterVivamaxContent()">
+          <option value="popularity.desc">Most Popular</option>
+          <option value="vote_average.desc">Top Rated</option>
+          <option value="first_air_date.desc">Newest</option>
+        </select>
+      </div>
+    </div>
+    <div class="list" id="vivamax-list"></div>
+    <div class="pagination-controls">
+      <button id="prev-page" onclick="prevPage()" disabled><i class="fas fa-chevron-left"></i> Previous</button>
+      <span>Page <span id="current-page">1</span></span>
+      <button id="next-page" onclick="nextPage()">Next <i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()"><i class="fas fa-times"></i></span>
+      <div class="modal-body">
+        <div class="server-note">
+          <i class="fas fa-info-circle"></i>
+          <span>If the current server is not working, please select another server from the options below. To enable subtitles, click the settings icon in the video player.</span>
+        </div>
+        <div class="video-container">
+          <iframe id="modal-video" width="100%" height="315" frameborder="0" allowfullscreen></iframe>
+        </div>
+        
+        <div class="server-controls-container">
+          <div class="server-controls">
+            <h3 class="controls-title">Playback Settings</h3>
+            <div class="server-group">
+              <label for="server">Select Server</label>
+              <select id="server" onchange="changeServer()">
+                <option value="vidsrcme">VidSrc.me (Recommended)</option>
+                <option value="2embed">2Embed</option>
+                <option value="superembed">SuperEmbed</option>
+                <option value="vidsrc">VidSrc</option>
+                <option value="vidsrcpro">VidSrc.pro</option>
+                <option value="vidsrcto">VidSrc.to</option>
+                <option value="vidsrcstream">VidSrc.stream</option>
+              </select>
+            </div>
+            <div class="quality-group">
+              <label for="quality">Video Quality</label>
+              <select id="quality" onchange="changeQuality()">
+                <option value="auto">Auto (Best)</option>
+                <option value="1080p">1080p</option>
+                <option value="720p">720p</option>
+                <option value="480p">480p</option>
+                <option value="360p">360p</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div class="content-details">
+          <img id="modal-image" src="" alt="Vivamax Movie Poster">
+          <div class="modal-text">
+            <h2 id="modal-title"></h2>
+            <div class="modal-meta">
+              <span class="rating"><i class="fas fa-star"></i> <span id="modal-rating"></span></span>
+              <span class="year" id="modal-year"></span>
+              <span class="content-type-badge" id="modal-content-type"></span>
+            </div>
+            <div id="modal-warning"></div>
+            <p id="modal-description"></p>
+            <div class="modal-genres" id="modal-genres"></div>
+          </div>
+        </div>
+        
+        <div class="similar-content">
+          <h3>You May Also Like</h3>
+          <div class="similar-list" id="similar-content-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-modal" id="search-modal">
+    <span class="close" onclick="closeSearchModal()"><i class="fas fa-times"></i></span>
+    <div class="search-container">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Search Vivamax Movies..." oninput="searchVivamaxContent()" />
+        <button onclick="searchVivamaxContent()"><i class="fas fa-search"></i></button>
+      </div>
+      <div class="results" id="search-results"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>JFlix</h3>
+        <p>Your one-stop destination for movies, TV shows, K-dramas, Vivamax, and anime.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="movies.html">Movies</a></li>
+          <li><a href="tvshows.html">TV Shows</a></li>
+          <li><a href="kdrama.html">Korean TV</a></li>
+          <li><a href="vivamax.html">Vivamax</a></li>
+          <li><a href="anime.html">Anime</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 JFlix. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <div class="donation-popup" id="donation-popup">
+    <div class="donation-content">
+      <span class="close-donation" onclick="closeDonationPopup()"><i class="fas fa-times"></i></span>
+      <h2>Support JFlix</h2>
+      <div class="donation-details">
+        <p><strong>GCash Account Number:</strong> 09761679955</p>
+        <p><strong>Account Name:</strong> Jxxxel S.</p>
+      </div>
+      <p class="thank-you-msg">Thank you for supporting JFlix! Your donation helps maintain and improve the service.</p>
+    </div>
+  </div>
+
+  <script src="js/vivamax.js?v=20250508"></script>
+  <script>
+    function openDonationPopup() {
+      document.getElementById('donation-popup').classList.add('active');
+    }
+    
+    function closeDonationPopup() {
+      document.getElementById('donation-popup').classList.remove('active');
+    }
+  </script>
+</body>
+</html>
